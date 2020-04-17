@@ -1,0 +1,203 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+html {
+    height: 100%;
+    background: white;
+    box-sizing: border-box;
+    background-attachment: fixed;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/**********ALL NAVBAR CSS**************************************/
+
+.navBar {
+    height: 84px;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 20px 0px #00000030;
+    width: 1464px;
+    box-sizing: border-box;
+}
+
+.logoBlock {
+    float: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    padding-left: 20px;
+}
+
+.logoIcon {
+    height: 50px;
+}
+
+.tripmateName {
+    padding-left: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    color: #666666;
+}
+
+
+.container {
+    width: 1200px;
+    height: 600px;
+    color: #FFFFFF;
+    overflow: hidden;
+    margin: 40px 132px auto 132px;
+    border-radius: 5px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    background-color: #FFD300;
+    display: table;
+    color: #333333;
+    font-weight: 600;
+}
+
+.header div {
+    width: 200px;
+    text-align: center;
+    height: 60px;
+    display: table-cell;
+    vertical-align: middle;
+
+}
+
+.resultSet {
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    background-color: #333333;
+}
+
+.entry {
+    height: 60px;
+    border-bottom: 2px solid #444444;
+}
+
+.entry div {
+    width: 200px;
+    text-align: center;
+    height: 60px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/**********************MOBILE************************************/
+@media only screen and (orientation: portrait) {
+    body {
+        font-size: 3.6vw;
+    }
+
+    .navBar {
+        height: 12vh;
+        background-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0vw 0vw 4vw 0vw #00000030;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .logoBlock {
+        float: left;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 100%;
+        padding-left: 6vw;
+    }
+
+    .logoIcon {
+        height: 6vh;
+    }
+
+    .tripmateName {
+        padding-left: 3vw;
+        font-family: 'Oswald', sans-serif;
+        font-size: 3.2vh;
+        color: #666666;
+    }
+
+    .container {
+        margin: 4vh auto auto auto;
+        width: 90vw;
+        height: 80vh;
+        overflow-x: scroll;
+
+    }
+
+    .header {
+        display: flex;
+        width: 180vw;
+        height: 8vh;
+        flex-direction: row;
+        background-color: #FFD300;
+        display: table;
+        color: #333333;
+        font-weight: 600;
+    }
+
+    .header div {
+
+        width: 30vw;
+        height: 100%;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+
+    }
+
+    .resultSet {
+        width: 180vw;
+        overflow-y: scroll;
+        border: none;
+        background-color: #333333;
+    }
+
+    .entry {
+        height: 8vh;
+        border-bottom: 0.2vh solid #444444;
+        display: table;
+    }
+
+    .entry div {
+        width: 30vw;
+        text-align: center;
+        height: 100%;
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+
+/************************SCROLL BAR******************************/
+@media only screen and (min-width: 577px) {
+    .resultSet::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .resultSet::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.00);
+    }
+
+    .resultSet::-webkit-scrollbar-thumb {
+        background: #DDDDDD;
+    }
+
+    .resultSet::-webkit-scrollbar-thumb:hover {
+        background: #505050;
+    }
+
+    .resultSet::-webkit-scrollbar-corner {
+        background: rgba(0, 0, 0, 0.00);
+    }
+}

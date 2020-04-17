@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static_files/roadbloc.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+    <title>RoadBloc</title>
+</head>
+
+<body>
+    <div class="navBar">
+        <div class="logoBlock">
+            <img class="logoIcon" src="static_files/RoadBloc.png">
+            <p class="tripmateName">RoadBloc</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="serialNo">SERIAL NO</div>
+            <div class="date">DATE</div>
+            <div class="time">TIME</div>
+            <div class="speed">SPEED KMPH</div>
+            <div class="licNo">LICENSE NO</div>
+            <div class="licError">ERROR</div>
+        </div>
+        <div class="resultSet">
+        <!--<div class="entry">
+                <div class="serialNo"></div>
+                <div class="date"></div>
+                <div class="time"></div>
+                <div class="speed"></div>
+                <div class="licNo"></div>
+                <div class="licError"></div>
+            </div>-->
+        </div>
+    </div>
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        // obtain from project setting
+        var firebaseConfig = {
+            apiKey: "",
+            authDomain: "",
+            databaseURL: "",
+            projectId: "",
+            storageBucket: "",
+            messagingSenderId: "",
+            appId: "",
+            measurementId: ""
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+    </script>
+    <script type="text/javascript" src="static_files/roadbloc.js"></script>
+</body>
+
+</html>
