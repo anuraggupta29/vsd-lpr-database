@@ -1,3 +1,4 @@
+import os
 import cv2
 import  imutils
 import pytesseract
@@ -5,8 +6,7 @@ from datetime import datetime
 from time import sleep
 from twilio.rest import Client
 import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+from firebase_admin import credentials, firestore, storage
 from dlib import correlation_tracker, rectangle as dlib_rectangle
 from numpy import array as nparray
 from threading import Thread
@@ -41,7 +41,7 @@ def licenseProgram():
             licenseDataArr.append((timestamp1, spd1, licNo1, img1))
             print('Thread 1 Complete')
         else:
-            sleep(2.0)
+            sleep(5.0)
 
 def getLicenseNo(imgFile):
     licNoF = None
@@ -103,16 +103,23 @@ def storeData():
             date2 = timestamp2.strftime("%Y-%m-%d")
             time2 = timestamp2.strftime("%H: %M: %S")
 
+            imagepath = timestamp2.strftime("%Y-%m-%d-%H-%M-%S-%f")+'.jpeg'
+            cv2.imwrite(imagepath, img2)
+            blob = bucket.blob(imagepath)
+            blob.upload_from_filename(imagepath)
+            imageurl = blob.public_url
+            os.remove(imagepath)
+
             if licNo2 == None:
                 licNo2 = 'NULL'
                 licError = 1
 
-            dataDict = {'deviceID': 1, 'date': date2, 'time': time2, 'speed': spd2, 'licNo': licNo2, 'licError': licError}
+            dataDict = {'deviceID': 1, 'date': date2, 'time': time2, 'speed': spd2, 'licNo': licNo2, 'licError': licError, 'imageLink': imageurl}
             db.collection(u'overspeed').add(dataDict)
 
             print('thread2 complete')
         else:
-            sleep(2.0)
+            sleep(5.0)
 
 def sendSMS():
     # Your Account Sid and Auth Token from twilio.com/console
@@ -124,7 +131,7 @@ def sendSMS():
     message = client.messages \
                     .create(
                          body="Your text here",
-                         from_='',#your twilio phone number
+                         from_='',#Your twilio phone number
                          to='+91'+str("ENTER RECIEVER CONTACT NUMBER")
                      )
 
@@ -135,9 +142,11 @@ def sendSMS():
 cred = credentials.Certificate('vsd-lpr-json-key.json')
 
 try:
-    firebase_admin.initialize_app(cred)
+    #firebase_admin.initialize_app(cred)
+    firebase_admin.initialize_app(cred, {'storageBucket': '<your-bucket-name>.appspot.com'})
     db = firestore.client()
-    print ("Connected to Cloud FireStore")
+    bucket = storage.bucket()
+    print ("Connected to Cloud FireStore and Cloud storage")
 
 except:
     print ("Unable to Connect")

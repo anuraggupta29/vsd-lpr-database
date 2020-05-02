@@ -12,8 +12,13 @@ html {
     height: 100%;
     background: white;
     box-sizing: border-box;
+    overflow-x: hidden;
     background-attachment: fixed;
     font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    -webkit-tap-highlight-color: transparent;
 }
 
 /**********ALL NAVBAR CSS**************************************/
@@ -22,7 +27,7 @@ html {
     height: 84px;
     background-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0px 0px 20px 0px #00000030;
-    width: 1464px;
+    width: 100vw;
     box-sizing: border-box;
 }
 
@@ -39,7 +44,7 @@ html {
     height: 50px;
 }
 
-.tripmateName {
+.headName {
     padding-left: 10px;
     font-family: 'Oswald', sans-serif;
     font-size: 28px;
@@ -47,16 +52,17 @@ html {
 }
 
 
+/*********CONTENT*********************/
 .container {
-    width: 1200px;
-    height: 600px;
+    width: 100vw;
+    height: 100vh;
     color: #FFFFFF;
     overflow: hidden;
-    margin: 40px 132px auto 132px;
     border-radius: 5px;
 }
 
 .header {
+    width: 100%;
     display: flex;
     flex-direction: row;
     background-color: #FFD300;
@@ -82,8 +88,12 @@ html {
 }
 
 .entry {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
     height: 60px;
     border-bottom: 2px solid #444444;
+    display: table;
 }
 
 .entry div {
@@ -94,6 +104,24 @@ html {
     vertical-align: middle;
 }
 
+.viewButton{
+    text-decoration: none;
+}
+
+.imageLink a div{
+    width: 80px;
+    height: 30px;
+    background-color: #555555;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-radius: 15px;
+    font-size: 14px;
+}
+
+.imageLink a div:hover{
+    background-color: white;
+    color: #333333;
+}
 /**********************MOBILE************************************/
 @media only screen and (orientation: portrait) {
     body {
@@ -121,7 +149,7 @@ html {
         height: 6vh;
     }
 
-    .tripmateName {
+    .headName {
         padding-left: 3vw;
         font-family: 'Oswald', sans-serif;
         font-size: 3.2vh;
@@ -129,16 +157,17 @@ html {
     }
 
     .container {
-        margin: 4vh auto auto auto;
-        width: 90vw;
-        height: 80vh;
+        margin: 0vh 0vh 0vh 0vh;
+        width: 100vw;
+        height: 100vh;
         overflow-x: scroll;
+        border-radius: 0px;
 
     }
 
     .header {
         display: flex;
-        width: 180vw;
+        width: 210vw;
         height: 8vh;
         flex-direction: row;
         background-color: #FFD300;
@@ -158,7 +187,7 @@ html {
     }
 
     .resultSet {
-        width: 180vw;
+        width: 210vw;
         overflow-y: scroll;
         border: none;
         background-color: #333333;
@@ -176,6 +205,16 @@ html {
         height: 100%;
         display: table-cell;
         vertical-align: middle;
+    }
+
+    .imageLink a div{
+        width: 16vw;
+        height: 4vh;
+        background-color: #555555;
+        color: #FFFFFF;
+        text-decoration: none;
+        border-radius: 2vh;
+        font-size: 1.5vh;
     }
 }
 

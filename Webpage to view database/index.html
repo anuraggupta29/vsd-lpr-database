@@ -4,19 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="static_files/roadbloc.css">
+    <link rel="stylesheet" type="text/css" href="static_files/vsd-lpr-page.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500,600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
-    <title>RoadBloc</title>
+    <title>vsd-lpr</title>
 </head>
 
 <body>
     <div class="navBar">
         <div class="logoBlock">
-            <img class="logoIcon" src="static_files/RoadBloc.png">
-            <p class="tripmateName">RoadBloc</p>
+            <img class="logoIcon" src="static_files/icon.png">
+            <p class="headName">vsd-lpr</p>
         </div>
     </div>
+    
     <div class="container">
         <div class="header">
             <div class="serialNo">SERIAL NO</div>
@@ -25,6 +26,7 @@
             <div class="speed">SPEED KMPH</div>
             <div class="licNo">LICENSE NO</div>
             <div class="licError">ERROR</div>
+            <div class="imageLink">IMAGE</div>
         </div>
         <div class="resultSet">
         <!--<div class="entry">
@@ -33,7 +35,7 @@
                 <div class="time"></div>
                 <div class="speed"></div>
                 <div class="licNo"></div>
-                <div class="licError"></div>
+                <div class="imageLink"><a href = ><div>View </div></a></div>
             </div>-->
         </div>
     </div>
@@ -43,7 +45,6 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
     <script>
         // Your web app's Firebase configuration
-        // obtain from project setting
         var firebaseConfig = {
             apiKey: "",
             authDomain: "",
@@ -58,7 +59,7 @@
         firebase.initializeApp(firebaseConfig);
         var db = firebase.firestore();
     </script>
-    <script type="text/javascript" src="static_files/roadbloc.js"></script>
+    <script type="text/javascript" src="static_files/vsd-lpr-page.js"></script>
 </body>
 
 </html>

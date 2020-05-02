@@ -4,9 +4,7 @@ import pytesseract
 from datetime import datetime
 from time import sleep
 from twilio.rest import Client
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+import ibm_db
 from dlib import correlation_tracker, rectangle as dlib_rectangle
 from numpy import array as nparray
 from threading import Thread
@@ -30,7 +28,8 @@ def estimateSpeed(carID):
 def licenseProgram():
     while True:
         if len(overSpeedArr)>0:
-            timestamp1, spd1, img1 = overSpeedArr.pop(0)
+            datetime1, spd1, img1 = overSpeedArr.pop(0)
+            datetime1 = datetime1.strftime("%Y-%m-%d %H:%M:%S")
             licPlateImage = None
             licNo1  = None
             imgFile = img1
@@ -38,7 +37,7 @@ def licenseProgram():
             licNo1,licPlateImage = getLicenseNo(imgFile)
             #viewResults(image, licPlateImage, licNo)
 
-            licenseDataArr.append((timestamp1, spd1, licNo1, img1))
+            licenseDataArr.append((datetime1, spd1, licNo1, img1))
             print('Thread 1 Complete')
         else:
             sleep(2.0)
@@ -99,17 +98,12 @@ def viewResults(img1,licPlateImage,licNo1):
 def storeData():
     while True:
         if len(licenseDataArr)>0:
-            timestamp2, spd2, licNo2, img2 = licenseDataArr.pop(0)
-            date2 = timestamp2.strftime("%Y-%m-%d")
-            time2 = timestamp2.strftime("%H: %M: %S")
-
+            datetime2, spd2, licNo2, img2 = licenseDataArr.pop(0)
             if licNo2 == None:
                 licNo2 = 'NULL'
-                licError = 1
-
-            dataDict = {'deviceID': 1, 'date': date2, 'time': time2, 'speed': spd2, 'licNo': licNo2, 'licError': licError}
-            db.collection(u'overspeed').add(dataDict)
-
+                licenseError = 1
+            insertQuery = "insert into OVERSPEED (DEVICE_NO, DATE_TIME, SPEED, LIC_NO, LIC_ERROR) values ({}, '{}', {}, '{}', {});".format(1, datetime2, spd2, licNo2, licenseError)
+            insertStmt2 = ibm_db.exec_immediate(conn, insertQuery)
             print('thread2 complete')
         else:
             sleep(2.0)
@@ -124,23 +118,38 @@ def sendSMS():
     message = client.messages \
                     .create(
                          body="Your text here",
-                         from_='',#your twilio phone number
+                         from_='',#Your twilio phone number
                          to='+91'+str("ENTER RECIEVER CONTACT NUMBER")
                      )
 
     return message.sid
 
 
-#CONNECT TO FIREBASE PROJECT----------------------------------------------------
-cred = credentials.Certificate('vsd-lpr-json-key.json')
+#DATABASE CREDENTIALS AND CONNECTING--------------------------------------------
+dsn_hostname = ""
+dsn_uid = ""
+dsn_pwd = ""
+
+dsn_driver = "{IBM DB2 ODBC DRIVER}"
+dsn_database = "BLUDB"
+dsn_port = "50000"
+dsn_protocol = "TCPIP"
+
+dsn = (
+    "DRIVER={0};"
+    "DATABASE={1};"
+    "HOSTNAME={2};"
+    "PORT={3};"
+    "PROTOCOL={4};"
+    "UID={5};"
+    "PWD={6};").format(dsn_driver, dsn_database, dsn_hostname, dsn_port, dsn_protocol, dsn_uid, dsn_pwd)
 
 try:
-    firebase_admin.initialize_app(cred)
-    db = firestore.client()
-    print ("Connected to Cloud FireStore")
+    conn = ibm_db.connect(dsn, "", "")
+    print ("Connected to Database: ", dsn_database, "as user: ", dsn_uid, "on host: ", dsn_hostname)
 
 except:
-    print ("Unable to Connect")
+    print ("Unable to connect: ", ibm_db.conn_errormsg() )
 
 #DATA FOR THREADS---------------------------------------------------------------
 overSpeedArr = []
