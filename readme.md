@@ -21,8 +21,8 @@
   <li>main_firebase_image.py contains an additional 'imageLink' field.</li>
 </ul>
 
-<h3>How to Use</h3>
-<h4>For Firestore</h4>
+<h3>For Firestore</h3>
+
 *Knowledge of firebase Required.
 1. Create a firestore project and database service.
 2. C colletion 'overspeed' will be created automatically while running .py file. (Can change it)
@@ -30,24 +30,30 @@
 4. Create a firebase cloud storage instance as well (for images) and make the bucket public. (google it!)
 
 <h3>For Sqlite3</h3>
+
 1. Stores the same details as firebase except images in the local sqlite database. (files/vsdlpr.sqlite)
 
 <h3>for IBM Db2</h3>
+
 1. Stores the same details as firebase except images in the ibm Db2 Cloud database.
 
 <h3>View Video and Overspeed Details</h3>
+
 1. Use main_saveimage.py to view the video and detection, along with estimated speed.
 
-<h3>Sending SMS<h3>
-1. SEND SMS PART REQUIRES A SEPARATE TABLE WITH OWNER DETAILS and CORRESPONDING LICENSE NUMBER.
-2. OWENER DETAILS PART ISN'T IMPLEMENTED YET - FUNCTION IS PROVIDED.
+<h3>Sending SMS</h3>
+
+1. Send SMS part requires a separate table with owner details and corresponding license number.
+2. Owner Details part isn't implemented yet, function is provided.
 
 <h3>Webpage to view Firebase Database</h3>
+
 1. Webpage has no backend can be hosted easily on github etc.
 2. Webpage also requires firestore credentials, can be obtained from project settings.
 3. Don't host if database in test mode. it will give anyone access to database!!
 
 <h3>Relevant Details</h3>
+
 1. License plate detection is often inaccurate.
 2. The license image obtained is low contrast, and low res around 20 by 50 px, if using 1280 by 720 video.
 3. Thus text recognition is so far impossible.
