@@ -26,7 +26,7 @@
 *Knowledge of firebase Required.
 1. Create a firestore project and database service.
 2. C colletion 'overspeed' will be created automatically while running .py file. (Can change it)
-3. Get your api-keys/credentials in json format for your python project and replace with .json file. (from your firebase project settings)
+3. Get your api-keys/credentials in json format for your project and replace with .json file. (from firebase project settings)
 4. Create a firebase cloud storage instance as well (for images) and make the bucket public. (google it!)
 
 <h3>For Sqlite3</h3>
