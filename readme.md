@@ -1,6 +1,5 @@
 <h4>Created by Anurag Gupta</h4>
-<h5>Project still under development<h5>
-  
+
 <h2>Vehicle Speed Detection & License Plate Recognition using Computer Vision</h2>
 
 1. Uses haarcascade classifier to detect cars.
